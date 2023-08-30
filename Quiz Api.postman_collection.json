@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "3ad26f7d-a8c3-40e1-9572-3052431e5b3b",
+		"name": "Quiz Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "978772"
+	},
+	"item": [
+		{
+			"name": "GET /quiz",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"var schema = {\r",
+							"    \"type\": \"array\",\r",
+							"    \"items\": [{\r",
+							"        type: \"object\",\r",
+							"        properties:{\r",
+							"         \"id\": {\r",
+							"            \"type\":\"integer\"\r",
+							"             },\r",
+							"         \"name\": {\r",
+							"             \"type\":\"string\"\r",
+							"             },\r",
+							"         \"questions\": {\r",
+							"             \"type\":\"array\",\r",
+							"             \"items\": [{\r",
+							"                 type: \"object\",\r",
+							"                 properties: {\r",
+							"                    \"id\": { \"type\": \"integer\" },\r",
+							"                    \"text\": { \"type\": \"string\" },\r",
+							"                    \"answers\": { \r",
+							"                        \"type\": \"array\",\r",
+							"                        \"items\": [{\r",
+							"                            type: \"object\",\r",
+							"                            properties: {\r",
+							"                                \"id\": { \"type\": \"integer\" },\r",
+							"                                \"text\": { \"type\": \"string\" }\r",
+							"                            },\r",
+							"                            required: [\"id\", \"text\"]\r",
+							"                        }]\r",
+							"                    },\r",
+							"                 },\r",
+							"                 required: [\"id\", \"text\"]\r",
+							"             }]\r",
+							"            }\r",
+							"        },\r",
+							"        required: [\"id\", \"name\"]\r",
+							"    }]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Validate schema\", () => {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /quiz",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Quiz 3\",\r\n    \"questions\": [\r\n        {\r\n            \"text\": \"Does this work?\",\r\n            \"answers\": [\r\n                {\r\n                    \"text\": \"Yes!\",\r\n                    \"correct\": \"true\"\r\n                },\r\n                {\r\n                    \"text\": \"No.\",\r\n                    \"correct\": \"false\"\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/quiz",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /quiz/{id}/rename/{newName}",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/quiz/43/rename/Quiz 4",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz",
+						"43",
+						"rename",
+						"Quiz 4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /quiz/{id}/random",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/quiz/1/random",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz",
+						"1",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /quiz/{id}/add",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"How's the weather?\",\r\n    \"answers\": [\r\n        {\r\n            \"text\": \"Sunny and Beautiful\",\r\n            \"correct\": \"true\"\r\n        },\r\n        {\r\n            \"text\": \"Rainy and perfect for a nap\",\r\n            \"correct\": \"false\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/quiz/43/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz",
+						"43",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /quiz/{id}/delete/{questionId}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/quiz/43/delete/47",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz",
+						"43",
+						"delete",
+						"47"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /quiz/{id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/quiz/43",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"quiz",
+						"43"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "question_id",
+			"value": ""
+		}
+	]
+}
